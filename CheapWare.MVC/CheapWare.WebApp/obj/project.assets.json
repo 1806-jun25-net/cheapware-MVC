@@ -11506,11 +11506,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare\\CheapWare.WebApp\\CheapWare.WebApp.csproj",
+      "projectUniqueName": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare.MVC\\CheapWare.WebApp\\CheapWare.WebApp.csproj",
       "projectName": "CheapWare.WebApp",
-      "projectPath": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare\\CheapWare.WebApp\\CheapWare.WebApp.csproj",
+      "projectPath": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare.MVC\\CheapWare.WebApp\\CheapWare.WebApp.csproj",
       "packagesPath": "C:\\Users\\joeis\\.nuget\\packages\\",
-      "outputPath": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare\\CheapWare.WebApp\\obj\\",
+      "outputPath": "C:\\Revature\\Project2\\cheapware-MVC\\CheapWare.MVC\\CheapWare.WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
