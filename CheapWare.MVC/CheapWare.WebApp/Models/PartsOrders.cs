@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Cheapware.WebApp.Models
 {
-    public partial class PartsOrder
+    public partial class PartsOrders
     {
-        public PartsOrder()
+        public PartsOrders()
         {
-            PartsJunction = new HashSet<PartsJunction>();
+            PartsJunctions = new HashSet<PartsJunctions>();
         }
 
         public int OrderId { get; set; }
@@ -16,6 +16,6 @@ namespace Cheapware.WebApp.Models
         public DateTime TimeOfOrder { get; set; }
 
         public Customers Customer { get; set; }
-        public ICollection<PartsJunction> PartsJunction { get; set; }
+        public ICollection<PartsJunctions> PartsJunctions { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Cheapware.WebApp.Models
 {
-    public partial class MotherBoard
+    public partial class MotherBoards
     {
         public int MotherBoardId { get; set; }
         public string Name { get; set; }
@@ -13,6 +13,6 @@ namespace Cheapware.WebApp.Models
         public decimal Price { get; set; }
         public string Img { get; set; }
 
-        public Inventory NameNavigation { get; set; }
+        public Inventorys NameNavigation { get; set; }
     }
 }
