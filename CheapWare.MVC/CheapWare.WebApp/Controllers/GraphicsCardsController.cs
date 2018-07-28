@@ -12,10 +12,10 @@ using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
-    public class GraphicsCardController : AServiceController
+    public class GraphicsCardsController : AServiceController
     {
 
-        public GraphicsCardController(HttpClient httpClient) : base(httpClient)
+        public GraphicsCardsController(HttpClient httpClient) : base(httpClient)
         { }
 
         // GET: Inventorys
@@ -23,7 +23,7 @@ namespace CheapWare.WebApp.Controllers
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var request = CreateRequestToService(HttpMethod.Get, "api/graphicscard");
+            var request = CreateRequestToService(HttpMethod.Get, "api/graphicscards");
 
             try
             {
@@ -68,7 +68,7 @@ namespace CheapWare.WebApp.Controllers
             {
                 string jsonString = JsonConvert.SerializeObject(gc);
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/graphicscard");
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/graphicscards");
                 {
                     // we set what the Content-Type header will be here
                     request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
