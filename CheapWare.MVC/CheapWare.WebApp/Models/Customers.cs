@@ -11,6 +11,7 @@ namespace Cheapware.WebApp.Models
         }
 
         public int CustomerId { get; set; }
+        public string Username { get; set; }
         public string CustomerName { get; set; }
         public string Address { get; set; }
 

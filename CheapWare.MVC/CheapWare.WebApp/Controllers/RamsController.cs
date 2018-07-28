@@ -14,7 +14,7 @@ namespace CheapWare.WebApp.Controllers
     public class RamsController : Controller
     {
 
-        private readonly static string ServiceUri = "http://localhost:49453/api/";
+        private readonly static string ServiceUri = "http://localhost:44306/api/";
 
         public HttpClient HttpClient { get; }
 
