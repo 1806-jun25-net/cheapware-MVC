@@ -40,7 +40,7 @@ namespace CheapWare.WebApp.Controllers
 
                 return View(cpu);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 // logging
                 return View("Error");
