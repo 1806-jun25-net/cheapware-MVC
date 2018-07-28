@@ -8,28 +8,22 @@ using Cheapware.WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
-    public class ComputerCasesController : Controller
+    public class ComputerCasesController : AServiceController
     {
 
-        private readonly static string ServiceUri = "http://localhost:44306/api/";
-
-        public HttpClient HttpClient { get; }
-
-        public ComputerCasesController(HttpClient httpClient)
-        {
-            HttpClient = httpClient;
-        }
+        public ComputerCasesController(HttpClient httpClient) : base(httpClient)
+        { }
 
         // GET: Inventorys
         public async Task<ActionResult> Index()
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var uri = ServiceUri + "cheapware";
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            var request = CreateRequestToService(HttpMethod.Get, "api/computercases");
 
             try
             {
@@ -42,11 +36,11 @@ namespace CheapWare.WebApp.Controllers
 
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<ComputerCases> cases = JsonConvert.DeserializeObject<List<ComputerCases>>(jsonString);
+                List<ComputerCases> cc = JsonConvert.DeserializeObject<List<ComputerCases>>(jsonString);
 
-                return View(cases);
+                return View(cc);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 // logging
                 return View("Error");
@@ -74,11 +68,10 @@ namespace CheapWare.WebApp.Controllers
             {
                 string jsonString = JsonConvert.SerializeObject(cc);
 
-                var uri = ServiceUri + "cheapware";
-                var request = new HttpRequestMessage(HttpMethod.Post, uri)
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/computercases");
                 {
                     // we set what the Content-Type header will be here
-                    Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
+                    request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
                 };
 
                 var response = await HttpClient.SendAsync(request);

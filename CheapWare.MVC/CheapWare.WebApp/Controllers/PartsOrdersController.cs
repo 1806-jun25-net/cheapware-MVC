@@ -8,28 +8,22 @@ using Cheapware.WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
-    public class PartsOrdersController : Controller
+    public class PartsOrdersControllers : AServiceController
     {
 
-        private readonly static string ServiceUri = "http://localhost:44306/api/";
-
-        public HttpClient HttpClient { get; }
-
-        public PartsOrdersController(HttpClient httpClient)
-        {
-            HttpClient = httpClient;
-        }
+        public PartsOrdersControllers(HttpClient httpClient) : base(httpClient)
+        { }
 
         // GET: Inventorys
         public async Task<ActionResult> Index()
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var uri = ServiceUri + "cheapware";
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            var request = CreateRequestToService(HttpMethod.Get, "api/partsorders");
 
             try
             {
@@ -46,7 +40,7 @@ namespace CheapWare.WebApp.Controllers
 
                 return View(po);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 // logging
                 return View("Error");
@@ -74,11 +68,10 @@ namespace CheapWare.WebApp.Controllers
             {
                 string jsonString = JsonConvert.SerializeObject(po);
 
-                var uri = ServiceUri + "cheapware";
-                var request = new HttpRequestMessage(HttpMethod.Post, uri)
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/partsorders");
                 {
                     // we set what the Content-Type header will be here
-                    Content = new StringContent(jsonString, Encoding.UTF8, "application/json")
+                    request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
                 };
 
                 var response = await HttpClient.SendAsync(request);
