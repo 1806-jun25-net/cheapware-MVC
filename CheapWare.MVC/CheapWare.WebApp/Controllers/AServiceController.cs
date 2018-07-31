@@ -14,7 +14,7 @@ namespace TodoMvc.Controllers
     {
         //http://cheapwareapi.azurewebsites.net/
         private static readonly Uri s_serviceUri = new Uri("https://localhost:44306/");
-        protected static readonly string s_CookieName = "TodoApiAuth";
+        protected static readonly string s_CookieName = "IdentityAuth";
 
         protected HttpClient HttpClient { get; }
 
