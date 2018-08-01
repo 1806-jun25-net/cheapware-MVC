@@ -25,12 +25,6 @@ namespace TodoMvc.Controllers
         public AccountController(HttpClient httpClient) : base(httpClient)
         { }
 
-        // GET: Account/Register
-        public ViewResult Register()
-        {
-            return View();
-        }
-
         // POST: Account/Register
         [HttpPost]
         public async Task<ActionResult> Register(ViewLoginInfo info)
