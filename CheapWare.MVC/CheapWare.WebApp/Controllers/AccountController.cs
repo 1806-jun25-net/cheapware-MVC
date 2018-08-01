@@ -40,14 +40,33 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
 
-            var login = new Login
+            Login login = new Login
             {
                 Username = info.Username,
                 Password = info.Password
             };
-             
+
 
             HttpRequestMessage apiAccRequest = CreateRequestToService(HttpMethod.Post, "api/Account/Register", login);
+
+            HttpResponseMessage apiAccResponse;
+
+            try
+            {
+                apiAccResponse = await HttpClient.SendAsync(apiAccRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiAccResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            PassCookiesToClient(apiAccResponse);
+
 
             //Create customer here
             Customers cust = new Customers
@@ -60,13 +79,10 @@ namespace TodoMvc.Controllers
 
             HttpRequestMessage apiCustRequest = CreateRequestToService(HttpMethod.Post, "api/Customers", cust);
 
-            HttpResponseMessage apiAccResponse;
-
             HttpResponseMessage apiCustResponse;
 
             try
             {
-                apiAccResponse = await HttpClient.SendAsync(apiAccRequest);
                 apiCustResponse = await HttpClient.SendAsync(apiCustRequest);
             }
             catch
@@ -74,12 +90,10 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
 
-            if (!apiAccResponse.IsSuccessStatusCode && !apiCustResponse.IsSuccessStatusCode)
+            if (!apiCustResponse.IsSuccessStatusCode)
             {
                 return View("Error");
             }
-
-            PassCookiesToClient(apiAccResponse);
 
             return RedirectToAction("Index", "Home");
         }
