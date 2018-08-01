@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cheapware.WebApp.Models
 {
-    public class Login
+    public class ViewLoginInfo
     {
         [Required]
         public string Username { get; set; }
@@ -16,5 +16,12 @@ namespace Cheapware.WebApp.Models
         [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        public string CustomerName { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
     }
 }

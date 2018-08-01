@@ -12,8 +12,9 @@ namespace TodoMvc.Controllers
 {
     public abstract class AServiceController : Controller
     {
-        private static readonly Uri s_serviceUri = new Uri("http://cheapwareapi.azurewebsites.net/");
-        protected static readonly string s_CookieName = "TodoApiAuth";
+        //http://cheapwareapi.azurewebsites.net/
+        private static readonly Uri s_serviceUri = new Uri("https://localhost:44306/");
+        protected static readonly string s_CookieName = "IdentityAuth";
 
         protected HttpClient HttpClient { get; }
 
