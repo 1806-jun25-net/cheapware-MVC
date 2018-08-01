@@ -26,6 +26,10 @@ namespace TodoMvc.Controllers
         { }
 
         // POST: Account/Register
+        public ViewResult Register()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<ActionResult> Register(ViewLoginInfo info)
         {
