@@ -33,31 +33,53 @@ namespace TodoMvc.Controllers
 
         // POST: Account/Register
         [HttpPost]
-        public async Task<ActionResult> Register(Login account)
+        public async Task<ActionResult> Register(ViewLoginInfo info)
         {
             if (!ModelState.IsValid)
             {
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, "api/Account/Register", account);
+            var login = new Login
+            {
+                Username = info.Username,
+                Password = info.Password
+            };
+             
 
-            HttpResponseMessage apiResponse;
+            HttpRequestMessage apiAccRequest = CreateRequestToService(HttpMethod.Post, "api/Account/Register", login);
+
+            //Create customer here
+            Customers cust = new Customers
+            {
+                Username = info.Username,
+                Address = info.Address,
+                CustomerName = info.CustomerName
+            };
+
+
+            HttpRequestMessage apiCustRequest = CreateRequestToService(HttpMethod.Post, "api/Customers", cust);
+
+            HttpResponseMessage apiAccResponse;
+
+            HttpResponseMessage apiCustResponse;
+
             try
             {
-                apiResponse = await HttpClient.SendAsync(apiRequest);
+                apiAccResponse = await HttpClient.SendAsync(apiAccRequest);
+                apiCustResponse = await HttpClient.SendAsync(apiCustRequest);
             }
             catch
             {
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
+            if (!apiAccResponse.IsSuccessStatusCode && !apiCustResponse.IsSuccessStatusCode)
             {
                 return View("Error");
             }
 
-            PassCookiesToClient(apiResponse);
+            PassCookiesToClient(apiAccResponse);
 
             return RedirectToAction("Index", "Home");
         }
