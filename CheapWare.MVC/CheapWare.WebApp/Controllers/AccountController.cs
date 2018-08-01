@@ -25,12 +25,6 @@ namespace TodoMvc.Controllers
         public AccountController(HttpClient httpClient) : base(httpClient)
         { }
 
-        // GET: Account/Register
-        public ViewResult Register()
-        {
-            return View();
-        }
-
         // POST: Account/Register
         [HttpPost]
         public async Task<ActionResult> Register(Login account)
@@ -40,7 +34,7 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, "api/Account/Login", account);
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, "api/Account/Register", account);
 
             HttpResponseMessage apiResponse;
             try
@@ -62,11 +56,6 @@ namespace TodoMvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Account/Login
-        public ViewResult Login()
-        {
-            return View();
-        }
 
         // POST: Account/Login
         [HttpPost]
