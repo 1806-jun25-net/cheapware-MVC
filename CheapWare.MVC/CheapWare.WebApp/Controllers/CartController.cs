@@ -19,6 +19,9 @@ namespace CheapWare.WebApp.Controllers
         public CartController(HttpClient httpClient) : base(httpClient)
         { }
 
+
+        //Get (Index), Add (create), Delete (delete)
+
         // GET: Inventorys
         public async Task<ActionResult> Index()
         {

@@ -36,9 +36,9 @@ namespace CheapWare.WebApp.Controllers
 
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<Cpus> cpu = JsonConvert.DeserializeObject<List<Cpus>>(jsonString);
+                List<Cpus> cpus = JsonConvert.DeserializeObject<List<Cpus>>(jsonString);
 
-                return View(cpu);
+                return View(cpus);
             }
             catch (HttpRequestException)
             {
@@ -48,9 +48,35 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var request = CreateRequestToService(HttpMethod.Get, "api/cpus");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Cpus> cpus = JsonConvert.DeserializeObject<List<Cpus>>(jsonString);
+
+                foreach(var cpu in cpus)
+                {
+                    if (cpu.Cpuid == id)
+                    {
+                        return View(cpu);
+                    }
+                }
+                return View("Error");
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Inventorys/Create

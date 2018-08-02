@@ -1,0 +1,57 @@
+﻿@model Cheapware.WebApp.Models.Cpus
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cpus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cpuid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cpuid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Speed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Speed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Img)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Img)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Add to Cart</a>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
