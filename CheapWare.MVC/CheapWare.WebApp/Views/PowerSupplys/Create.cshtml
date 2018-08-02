@@ -28,9 +28,11 @@
                 <span asp-validation-for="Wattage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Modular" class="control-label"></label>
-                <input asp-for="Modular" class="form-control" />
-                <span asp-validation-for="Modular" class="text-danger"></span>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Modular" /> @Html.DisplayNameFor(model => model.Modular)
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>

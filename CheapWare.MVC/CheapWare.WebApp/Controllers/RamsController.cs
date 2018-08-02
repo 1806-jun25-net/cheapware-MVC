@@ -48,9 +48,35 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var request = CreateRequestToService(HttpMethod.Get, "api/rams");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Rams> rams = JsonConvert.DeserializeObject<List<Rams>>(jsonString);
+
+                foreach (var ram in rams)
+                {
+                    if (ram.Ramid == id)
+                    {
+                        return View(ram);
+                    }
+                }
+                return View("Error");
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Inventorys/Create

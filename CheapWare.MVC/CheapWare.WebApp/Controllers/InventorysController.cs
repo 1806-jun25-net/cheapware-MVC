@@ -48,9 +48,35 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Inventorys> invs = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
+
+                foreach (var inv in invs)
+                {
+                    if (inv.Name == id)
+                    {
+                        return View(inv);
+                    }
+                }
+                return View("Error");
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Inventorys/Create
