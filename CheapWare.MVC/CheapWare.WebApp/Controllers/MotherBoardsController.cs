@@ -48,9 +48,35 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var request = CreateRequestToService(HttpMethod.Get, "api/motherboards");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<MotherBoards> mbs = JsonConvert.DeserializeObject<List<MotherBoards>>(jsonString);
+
+                foreach (var mb in mbs)
+                {
+                    if (mb.MotherBoardId == id)
+                    {
+                        return View(mb);
+                    }
+                }
+                return View("Error");
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Inventorys/Create

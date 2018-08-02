@@ -48,9 +48,35 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var request = CreateRequestToService(HttpMethod.Get, "api/powersupplys");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<PowerSupplys> pss = JsonConvert.DeserializeObject<List<PowerSupplys>>(jsonString);
+
+                foreach (var ps in pss)
+                {
+                    if (ps.PowerSupplyId == id)
+                    {
+                        return View(ps);
+                    }
+                }
+                return View("Error");
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
+            }
         }
 
         // GET: Inventorys/Create
