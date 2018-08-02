@@ -48,9 +48,9 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(string name)
         {
-            var request = CreateRequestToService(HttpMethod.Get, "api/rams");
+            var request = CreateRequestToService(HttpMethod.Get, "api/rams/" + name);
 
             try
             {
@@ -62,16 +62,10 @@ namespace CheapWare.WebApp.Controllers
                 }
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<Rams> rams = JsonConvert.DeserializeObject<List<Rams>>(jsonString);
+                Rams ram = JsonConvert.DeserializeObject<Rams>(jsonString);
 
-                foreach (var ram in rams)
-                {
-                    if (ram.Ramid == id)
-                    {
-                        return View(ram);
-                    }
-                }
-                return View("Error");
+                return View(ram);
+
             }
             catch (HttpRequestException)
             {
