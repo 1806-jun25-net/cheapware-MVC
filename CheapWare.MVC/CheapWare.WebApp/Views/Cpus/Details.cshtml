@@ -6,36 +6,37 @@
 }
 
 
-<div class="container jumbotron">
-    <div class="container-fluid">
-        <h3 class="h3">@Html.DisplayFor(model => model.Name)</h3>
-        <img class ="img-responsive" style="width:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Image)" />
-    </div>
+<div class="container jumbotron" style="padding:15px !important;">
+    <div class="panel panel-primary" style="margin:5px;">
+        <div class="container-fluid" style="padding: 15px !important;">
+            <img class="img-responsive left" style="width:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Image)" />
+            <h3 class="h3">@Html.DisplayFor(model => model.Name)</h3>           
+        </div>
 
-        <dl class="dl-horizontal">
-        <dt>
+        <div class="panel-heading">
+            <h4 class="h4">Product Specs</h4>
+        </div>
+        <div class="panel-body">
             @Html.DisplayNameFor(model => model.Speed)
-        </dt>
-        <dd>
+            :&nbsp;
             @Html.DisplayFor(model => model.Speed)
-        </dd>
-        <dt>
+        </div>
+        <div class="panel-body">
             @Html.DisplayNameFor(model => model.Cores)
-        </dt>
-        <dd>
+            :&nbsp;
             @Html.DisplayFor(model => model.Cores)
-        </dd>
-        <dt>
+        </div>
+        <div class="panel-body">
             @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
+            :&nbsp;
+            $@Html.DisplayFor(model => model.Price)
+        </div>
+        <div class="panel-body">
+            <form asp-controller="Cart" asp-action ="AddToCart" style="display:inline-block !important;">
+            <input class ="btn btn-info"type ="button" value= "Add to Cart"/>
+            </form>
+            <button class="btn btn-primary" href="" value="Back to List">Back to List</button>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Index">Add to Cart</a>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
