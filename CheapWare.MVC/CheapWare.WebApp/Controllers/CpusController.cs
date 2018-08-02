@@ -48,9 +48,9 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(string name)
         {
-            var request = CreateRequestToService(HttpMethod.Get, "api/cpus");
+            var request = CreateRequestToService(HttpMethod.Get, "api/cpus/" + name);
 
             try
             {
@@ -62,16 +62,10 @@ namespace CheapWare.WebApp.Controllers
                 }
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<Cpus> cpus = JsonConvert.DeserializeObject<List<Cpus>>(jsonString);
+                Cpus cpu = JsonConvert.DeserializeObject<Cpus>(jsonString);
 
-                foreach(var cpu in cpus)
-                {
-                    if (cpu.Cpuid == id)
-                    {
-                        return View(cpu);
-                    }
-                }
-                return View("Error");
+                return View(cpu);
+                
             }
             catch (HttpRequestException)
             {
