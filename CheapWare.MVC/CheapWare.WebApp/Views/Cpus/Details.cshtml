@@ -5,24 +5,14 @@
     
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Cpus</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cpuid)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Cpuid)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+<div class="container jumbotron">
+    <div class="container-fluid">
+        <h3 class="h3">@Html.DisplayFor(model => model.Name)</h3>
+        <img class ="img-responsive" style="width:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Image)" />
+    </div>
+
+        <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Speed)
         </dt>
@@ -41,13 +31,6 @@
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            <img src= "@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Image)" />
-        </dd>
-
     </dl>
 </div>
 <div>
