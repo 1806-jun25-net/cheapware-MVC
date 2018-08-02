@@ -17,8 +17,9 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+        <div class="center-block">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -36,13 +37,16 @@
                     <li><a asp-area="" asp-controller="Cpus" asp-action="Index">CpuTesting</a></li>
                     <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
                     <li>
-                        <form asp-action="Index" method="get" float="right">
-                            <input type="search" name="search" />
-                            <button type="submit">Search</button>
+                        <form asp-action="Index" class="navbar-form navbar-left" method="get" float="right">
+                            <div class="form-group">
+                            <input class ="form-control" type="search" name="search" />
+                            <button class="btn btn-primary"type="submit">Search</button>
+                            </div>
                         </form>
                     </li>
                 </ul>
             </div>
+        </div>
         </div>
     </nav>
 
