@@ -48,9 +48,9 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(string id)
+        public async Task<ActionResult> Details(string name)
         {
-            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys/" + name);
 
             try
             {
@@ -62,16 +62,10 @@ namespace CheapWare.WebApp.Controllers
                 }
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<Inventorys> invs = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
+                Inventorys inv = JsonConvert.DeserializeObject<Inventorys>(jsonString);
 
-                foreach (var inv in invs)
-                {
-                    if (inv.Name == id)
-                    {
-                        return View(inv);
-                    }
-                }
-                return View("Error");
+                return View(inv);
+
             }
             catch (HttpRequestException)
             {

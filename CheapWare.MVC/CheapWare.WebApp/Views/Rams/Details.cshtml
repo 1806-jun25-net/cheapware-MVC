@@ -1,0 +1,54 @@
+﻿@model Cheapware.WebApp.Models.Rams
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rams</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ramid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ramid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Speed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Speed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

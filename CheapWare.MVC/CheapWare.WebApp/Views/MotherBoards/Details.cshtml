@@ -1,0 +1,60 @@
+﻿@model Cheapware.WebApp.Models.MotherBoards
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MotherBoards</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherBoardId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MotherBoardId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FormFactor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FormFactor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ramslots)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ramslots)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pcislots)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pcislots)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

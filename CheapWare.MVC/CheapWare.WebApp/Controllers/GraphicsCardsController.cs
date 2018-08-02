@@ -48,9 +48,9 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(string name)
         {
-            var request = CreateRequestToService(HttpMethod.Get, "api/graphicscards");
+            var request = CreateRequestToService(HttpMethod.Get, "api/graphicscards/" + name);
 
             try
             {
@@ -62,16 +62,10 @@ namespace CheapWare.WebApp.Controllers
                 }
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<GraphicsCards> gcs = JsonConvert.DeserializeObject<List<GraphicsCards>>(jsonString);
+                GraphicsCards gc = JsonConvert.DeserializeObject<GraphicsCards>(jsonString);
 
-                foreach (var gc in gcs)
-                {
-                    if (gc.GraphicsCardId == id)
-                    {
-                        return View(gc);
-                    }
-                }
-                return View("Error");
+                return View(gc);
+
             }
             catch (HttpRequestException)
             {

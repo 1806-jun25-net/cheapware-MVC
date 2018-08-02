@@ -10,7 +10,7 @@ namespace Cheapware.WebApp.Models
         public string Speed { get; set; }
         public string Size { get; set; }
         public decimal Price { get; set; }
-        public string Img { get; set; }
+        public string Image { get; set; }
 
         public Inventorys NameNavigation { get; set; }
     }

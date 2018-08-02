@@ -1,0 +1,54 @@
+﻿@model Cheapware.WebApp.Models.PowerSupplys
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PowerSupplys</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerSupplyId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerSupplyId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wattage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wattage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Modular)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Modular)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

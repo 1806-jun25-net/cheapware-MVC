@@ -48,36 +48,28 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(string name)
         {
+            var request = CreateRequestToService(HttpMethod.Get, "api/computercases/" + name);
+
+            try
             {
-                var request = CreateRequestToService(HttpMethod.Get, "api/computercases");
+                var response = await HttpClient.SendAsync(request);
 
-                try
-                {
-                    var response = await HttpClient.SendAsync(request);
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        return View("Error");
-                    }
-                    string jsonString = await response.Content.ReadAsStringAsync();
-
-                    List<ComputerCases> ccs = JsonConvert.DeserializeObject<List<ComputerCases>>(jsonString);
-
-                    foreach (var cc in ccs)
-                    {
-                        if (cc.ComputerCaseId == id)
-                        {
-                            return View(cc);
-                        }
-                    }
-                    return View("Error");
-                }
-                catch (HttpRequestException)
+                if (!response.IsSuccessStatusCode)
                 {
                     return View("Error");
                 }
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                ComputerCases cc = JsonConvert.DeserializeObject<ComputerCases>(jsonString);
+
+                return View(cc);
+
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error");
             }
         }
 

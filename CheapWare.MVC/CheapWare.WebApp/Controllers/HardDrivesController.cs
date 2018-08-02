@@ -48,9 +48,9 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(string name)
         {
-            var request = CreateRequestToService(HttpMethod.Get, "api/harddrives");
+            var request = CreateRequestToService(HttpMethod.Get, "api/harddrives/" + name);
 
             try
             {
@@ -62,16 +62,10 @@ namespace CheapWare.WebApp.Controllers
                 }
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                List<HardDrives> hds = JsonConvert.DeserializeObject<List<HardDrives>>(jsonString);
+                HardDrives hd = JsonConvert.DeserializeObject<HardDrives>(jsonString);
 
-                foreach (var hd in hds)
-                {
-                    if (hd.HardDriveId == id)
-                    {
-                        return View(hd);
-                    }
-                }
-                return View("Error");
+                return View(hd);
+
             }
             catch (HttpRequestException)
             {
