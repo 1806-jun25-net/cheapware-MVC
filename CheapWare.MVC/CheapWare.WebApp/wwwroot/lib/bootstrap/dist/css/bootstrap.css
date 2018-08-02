@@ -19,6 +19,7 @@ html {
 
 body {
     margin: 0;
+
 }
 
 article,
@@ -1412,7 +1413,7 @@ body {
     font-size: 14px;
     line-height: 1.42857143;
     color: #c8c8c8;
-    background-color: #272b30;
+    background-color: white;
 }
 
 input,

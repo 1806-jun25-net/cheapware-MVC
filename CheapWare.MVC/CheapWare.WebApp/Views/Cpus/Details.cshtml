@@ -15,25 +15,26 @@
 
         <div class="panel-heading">
             <h4 class="h4">Product Specs</h4>
-        </div>
-        <div class="panel-body">
-            @Html.DisplayNameFor(model => model.Speed)
+            <hr />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayNameFor(model => model.Speed)
             :&nbsp;
             @Html.DisplayFor(model => model.Speed)
-        </div>
-        <div class="panel-body">
-            @Html.DisplayNameFor(model => model.Cores)
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayNameFor(model => model.Cores)
             :&nbsp;
             @Html.DisplayFor(model => model.Cores)
-        </div>
-        <div class="panel-body">
-            @Html.DisplayNameFor(model => model.Price)
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayNameFor(model => model.Price)
             :&nbsp;
             $@Html.DisplayFor(model => model.Price)
+            <br />
+           
+            
         </div>
         <div class="panel-body">
-            <form asp-controller="Cart" asp-action ="AddToCart" style="display:inline-block !important;">
-            <input class ="btn btn-info"type ="button" value= "Add to Cart"/>
+            <form asp-controller="Cart" asp-action="AddToCart" style="display:inline-block !important;">
+                <input class="btn btn-info" type="button" value="Add to Cart" />
             </form>
             <button class="btn btn-primary" href="" value="Back to List">Back to List</button>
         </div>
