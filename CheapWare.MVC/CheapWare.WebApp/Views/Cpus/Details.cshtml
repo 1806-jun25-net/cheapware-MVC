@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    
 }
 
 <h2>Details</h2>
@@ -44,7 +45,7 @@
             @Html.DisplayNameFor(model => model.Img)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Img)
+            <img src="@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Img)" />
         </dd>
 
     </dl>
