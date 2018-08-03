@@ -2,47 +2,37 @@
 
 @{
     ViewData["Title"] = "Details";
+
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>ComputerCases</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ComputerCaseId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ComputerCaseId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd>
+<div class="container" style="padding:15px !important;">
+    <div class="panel panel-primary" style="margin:5px;">
+        <div class="container-fluid" style="padding: 15px !important;">
+            <img class="img-responsive left" style="width:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + Model.Image)" />
+            <h3 class="h3">@Html.DisplayFor(model => model.Name)</h3>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="h4">Product Specs</h4>
+            <hr />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayNameFor(model => model.Size)
+            :&nbsp;
             @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayNameFor(model => model.Price)
+            :&nbsp;
             @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-    </dl>
+
+
+        </div>
+        <div class="panel-body">
+            <form asp-controller="Cart" asp-action="AddToCart" style="display:inline-block !important;">
+                <input class="btn btn-info" type="button" value="Add to Cart" />
+            </form>
+            <button class="btn btn-primary" href="" value="Back to List">Back to List</button>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
