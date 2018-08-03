@@ -117,9 +117,24 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/cart/" + id);
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: Inventorys/Delete/5
