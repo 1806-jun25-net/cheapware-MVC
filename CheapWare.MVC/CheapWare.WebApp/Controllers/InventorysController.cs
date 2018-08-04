@@ -18,6 +18,58 @@ namespace CheapWare.WebApp.Controllers
         public InventorysController(HttpClient httpClient) : base(httpClient)
         { }
 
+        public async Task<ActionResult> SortByCheapest()
+        {
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString).OrderBy(x => x.Price).ToList();
+
+                return View(inv);
+            }
+            catch (HttpRequestException)
+            {
+                // logging
+                return View("Error");
+            }
+        }
+
+        public async Task<ActionResult> SortByExpensive()
+        {
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString).OrderByDescending(x => x.Price).ToList();
+
+                return View(inv);
+            }
+            catch (HttpRequestException)
+            {
+                // logging
+                return View("Error");
+            }
+        }
+
         // GET: Inventorys
         public async Task<ActionResult> Index()
         {
