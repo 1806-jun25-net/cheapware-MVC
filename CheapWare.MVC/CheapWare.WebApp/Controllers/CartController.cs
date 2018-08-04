@@ -48,7 +48,33 @@ namespace CheapWare.WebApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> AddToCart(Cart cart)
+        {
+            try
+            {
+                string jsonString = JsonConvert.SerializeObject(cart);
 
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/Cart");
+                {
+                    // we set what the Content-Type header will be here
+                    request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                };
+
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                return RedirectToAction("Index", "Cart");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         [HttpDelete]
         public ActionResult Details(int id)
         {

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Cheapware.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace TodoMvc.Controllers
 {
@@ -93,6 +94,26 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
 
+            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers", cust.Username);
+            HttpResponseMessage apiResp;
+            try
+            {
+                apiResp = await HttpClient.SendAsync(apiReq);
+            }
+            catch
+            {
+                return View("Error");
+            }
+            if (!apiResp.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+            string jsonString = await apiResp.Content.ReadAsStringAsync();
+
+            Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
+
+            TempData["CustomerId"] = cc.CustomerId;
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -129,6 +150,25 @@ namespace TodoMvc.Controllers
             }
 
             PassCookiesToClient(apiResponse);
+            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers", account.Username);
+            HttpResponseMessage apiResp;
+            try
+            {
+                apiResp = await HttpClient.SendAsync(apiReq);
+            }
+            catch
+            {
+                return View("Error");
+            }
+            if (!apiResp.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+            string jsonString = await apiResp.Content.ReadAsStringAsync();
+
+            Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
+
+            TempData["CustomerId"] = cc.CustomerId;
 
             return RedirectToAction("Index", "Home");
         }
