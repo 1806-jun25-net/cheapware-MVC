@@ -40,19 +40,16 @@ namespace CheapWare.WebApp.Controllers
                 }
 
                 string jsonString = await response.Content.ReadAsStringAsync();
-
-                List<Cart> cart = JsonConvert.DeserializeObject<List<Cart>>(jsonString);
-
-                return View(cart);
             }
-            catch (HttpRequestException)
+            catch
             {
-                // logging
                 return View("Error");
             }
+            return View();
         }
 
-        // GET: Inventorys/Details/5
+
+        [HttpDelete]
         public ActionResult Details(int id)
         {
             return View();
@@ -101,22 +98,7 @@ namespace CheapWare.WebApp.Controllers
             return View();
         }
 
-        // POST: Inventorys/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Inventorys/Delete/5
         public async Task<ActionResult> Delete(int id)
@@ -139,21 +121,6 @@ namespace CheapWare.WebApp.Controllers
             }
         }
 
-        // POST: Inventorys/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
+        
 }

@@ -1,45 +1,25 @@
-﻿@model IEnumerable<CheapWare.WebApp.Models.Cart>
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<Cheapware.WebApp.Models.Inventorys>
 
-<h2>Index</h2>
-
-<a asp-action="Create">Create New</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CartId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <h2 class="h2">Your Cart</h2>
+    <div class="panel panel-primary">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CartId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CartId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CartId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CartId })
-                </td>
-            </tr>
+            <div class="container-fluid panel-body">
+                <div class="info top">
+                    <h3 class="h3" style="text-align:center;">@Html.DisplayFor(model => item.Name)</h3>
+                    <img class="img-responsive center-block" style="width:25%;height:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + item.Image)" />
+                    <h4 class="h4" style="display:inline-block;">@Html.DisplayNameFor(model => item.Price):</h4>
+                    &nbsp;<h4 class="h4" style="display:inline-block;">$@Html.DisplayFor(model => item.Price)</h4>
+                    <br />
+                    <h4 class="h4" style="display:inline-block;">@Html.DisplayNameFor(model => item.Category):</h4>
+                    <h4 class="h4" style="display:inline-block;">@Html.DisplayFor(model => item.Category)</h4>
+                </div>
+                
+
+                <hr />
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
+
