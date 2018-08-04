@@ -70,6 +70,32 @@ namespace CheapWare.WebApp.Controllers
             }
         }
 
+        public async Task<ActionResult> GetComputerCases()
+        {
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString).Where(x => x.Category == "ComputerCases").ToList();
+
+                return View(inv);
+            }
+            catch (HttpRequestException)
+            {
+                // logging
+                return View("Error");
+            }
+        }
+
         // GET: Inventorys
         public async Task<ActionResult> Index()
         {

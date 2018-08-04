@@ -3,10 +3,38 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">An error has occured</h1>
+<h3 class="alert-danger">HTTP Status Code: @TempData["statuscode"]</h3>
 
-@if (Model.ShowRequestId)
+
+<h5 class="alert-info">Here are the Status Codes:</h5>
+<div>
+    400 - Bad request - No.
+    <br />
+    401 - Unauthorized - Please identify yourself.
+    <br />
+    402 - Payment Required.
+    <br />
+    403 - Forbidden. You're not allowed to do that)
+    <br />
+    404 - Page Not Found (no resource for this URL)
+    <br />
+    405 - Method Not Allowed
+    <br />
+    405 - Not Acceptable (can't provide the representation you asked for)
+    <br />
+    418 - I'm a teapot
+    <br />
+    500 - Internal Server Error
+    <br />
+    501 - Not implemented
+    <br />
+    502 - Bad Gateway (we had to ask another server and IT had an error)
+
+</div>
+@*<h2 class="text-danger">An error occurred while processing your request.</h2>*@
+
+@*@if (Model.ShowRequestId)
 {
     <p>
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
@@ -19,4 +47,4 @@
 </p>
 <p>
     <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
-</p>
+</p>*@

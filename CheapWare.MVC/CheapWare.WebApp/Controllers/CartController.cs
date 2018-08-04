@@ -23,11 +23,11 @@ namespace CheapWare.WebApp.Controllers
         //Get (Index), Add (create), Delete (delete)
 
         // GET: Inventorys
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string username)
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var request = CreateRequestToService(HttpMethod.Get, "api/cart");
+            var request = CreateRequestToService(HttpMethod.Get, "api/cart/");
 
             try
             {
@@ -35,6 +35,7 @@ namespace CheapWare.WebApp.Controllers
 
                 if (!response.IsSuccessStatusCode)
                 {
+                    TempData["statuscode"] = response.StatusCode;
                     return View("Error");
                 }
 
@@ -82,6 +83,7 @@ namespace CheapWare.WebApp.Controllers
 
                 if (!response.IsSuccessStatusCode)
                 {
+                    TempData["statuscode"] = response.StatusCode;
                     return View("Error");
                 }
 
