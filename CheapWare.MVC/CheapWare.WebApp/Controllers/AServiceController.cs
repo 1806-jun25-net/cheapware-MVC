@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace TodoMvc.Controllers
+namespace CheapWare.WebApp.Controllers
 {
     public abstract class AServiceController : Controller
     {
