@@ -110,7 +110,7 @@ namespace TodoMvc.Controllers
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
 
-            Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
+            var cc = JsonConvert.DeserializeObject<Customers>(jsonString);
 
             TempData["CustomerId"] = cc.CustomerId;
 
@@ -165,7 +165,7 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
-
+            
             Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
 
             TempData["CustomerId"] = cc.CustomerId;
