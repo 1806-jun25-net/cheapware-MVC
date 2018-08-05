@@ -96,7 +96,7 @@ namespace CheapWare.WebApp.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     return View("Error");
-                }
+                } 
 
                 return View();
             }

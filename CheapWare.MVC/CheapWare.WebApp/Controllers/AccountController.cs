@@ -113,7 +113,7 @@ namespace CheapWare.WebApp.Controllers
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
 
-            Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
+            var cc = JsonConvert.DeserializeObject<Customers>(jsonString);
 
             TempData["CustomerId"] = cc.CustomerId;
 
@@ -170,7 +170,7 @@ namespace CheapWare.WebApp.Controllers
                 return View("Error");
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
-
+            
             Customers cc = JsonConvert.DeserializeObject<Customers>(jsonString);
 
             TempData["CustomerId"] = cc.CustomerId;
