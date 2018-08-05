@@ -13,76 +13,25 @@ using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
-    public class CartController : AServiceController
+    public class CartsController : AServiceController
     {
 
-        public CartController(HttpClient httpClient) : base(httpClient)
+        public CartsController(HttpClient httpClient) : base(httpClient)
         { }
 
 
         //Get (Index), Add (create), Delete (delete)
 
-        // GET: Inventorys
-        public async Task<ActionResult> Index(string username)
-        {
-            // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var request = CreateRequestToService(HttpMethod.Get, "api/cart/");
-
-            try
-            {
-                var response = await HttpClient.SendAsync(request);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    TempData["statuscode"] = response.StatusCode;
-                    return View("Error");
-                }
-
-                string jsonString = await response.Content.ReadAsStringAsync();
-            }
-            catch
-            {
-                return View("Error");
-            }
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> AddToCart(Cart cart)
-        {
-            try
-            {
-                string jsonString = JsonConvert.SerializeObject(cart);
-
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/Cart");
-                {
-                    // we set what the Content-Type header will be here
-                    request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-                };
-
-                var response = await HttpClient.SendAsync(request);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return View("Error");
-                }
-
-                return RedirectToAction("Index", "Cart");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
         [HttpDelete]
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Inventorys/Create
-        public ActionResult Create()
+        [HttpGet]
+       public ActionResult Index()
         {
             return View();
         }
@@ -90,13 +39,19 @@ namespace CheapWare.WebApp.Controllers
         // POST: Inventorys/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Cart cart)
+        public async Task<ActionResult> Index(string name)
         {
+            var temp = TempData.Peek("CustomerId");
+            Carts cart = new Carts
+            {
+                CustomerId = (int)temp,
+                ProductId = name
+            };
             try
             {
                 string jsonString = JsonConvert.SerializeObject(cart);
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/cart");
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/cart/AddToCart");
                 {
                     // we set what the Content-Type header will be here
                     request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -110,7 +65,27 @@ namespace CheapWare.WebApp.Controllers
                     return View("Error");
                 }
 
-                return RedirectToAction(nameof(Index));
+                HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/inventorys/" + name);
+                HttpResponseMessage apiResp;
+                try
+                {
+                    apiResp = await HttpClient.SendAsync(apiReq);
+                }
+                catch
+                {
+                    return View("Error");
+                }
+                if (!apiResp.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+                string invjsonString = await apiResp.Content.ReadAsStringAsync();
+
+                Inventorys cc = JsonConvert.DeserializeObject<Inventorys>(jsonString);
+
+                //TempData["CustomerId"] = cc;
+
+                return RedirectToAction("index", cc);
             }
             catch
             {

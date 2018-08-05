@@ -19,6 +19,8 @@ namespace CheapWare.WebApp.Controllers
         { }
 
         // GET: Inventorys
+
+
         public async Task<ActionResult> Index()
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
@@ -47,6 +49,7 @@ namespace CheapWare.WebApp.Controllers
             }
         }
 
+       
         // GET: Inventorys/Details/5
         public ActionResult Details(int id)
         {

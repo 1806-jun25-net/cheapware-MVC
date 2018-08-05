@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CheapWare.WebApp.Models
+namespace Cheapware.WebApp.Models
 {
-    public class Cart
+    public class Carts
     {
         public int CartId { get; set; }
         public string ProductId { get; set; }
