@@ -7,7 +7,7 @@
         {
             <div class="container-fluid panel-body">
                 <div class="info top">
-                    <h3 class="h3" style="text-align:center;">@Html.DisplayFor(model => item.Name)</h3>
+                    <h3 class="h3" style="text-align:center;">@Html.DisplayFor(model => item.Category)</h3>
                     <img class="img-responsive center-block" style="width:25%;height:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + item.Image)" />
                     <h4 class="h4" style="display:inline-block;">@Html.DisplayNameFor(model => item.Price):</h4>
                     &nbsp;<h4 class="h4" style="display:inline-block;">$@Html.DisplayFor(model => item.Price)</h4>

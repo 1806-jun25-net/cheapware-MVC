@@ -96,7 +96,7 @@ namespace TodoMvc.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers", cust.Username);
+            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers/GetCustomerByUserName/" + cust.Username);
             HttpResponseMessage apiResp;
             try
             {
@@ -154,7 +154,7 @@ namespace TodoMvc.Controllers
             }
 
             PassCookiesToClient(apiResponse);
-            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers", account.Username);
+            HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/Customers/GetCustomerByUserName/" + account.Username);
             HttpResponseMessage apiResp;
             try
             {
