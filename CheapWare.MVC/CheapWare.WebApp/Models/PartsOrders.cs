@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cheapware.WebApp.Models
+namespace CheapWare.WebApp.Models
 {
     public partial class PartsOrders
     {

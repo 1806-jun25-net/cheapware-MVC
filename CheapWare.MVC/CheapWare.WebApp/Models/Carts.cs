@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cheapware.WebApp.Models
+namespace CheapWare.WebApp.Models
 {
     public class Carts
     {

@@ -4,12 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Cheapware.WebApp.Models;
 using CheapWare.WebApp.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
@@ -36,8 +33,14 @@ namespace CheapWare.WebApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
         // POST: Inventorys/Create
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> AddCart(string name)
         {
             var temp = TempData.Peek("CustomerId");
@@ -64,8 +67,8 @@ namespace CheapWare.WebApp.Controllers
                     return View("Error");
                 }
 
-                
-                
+
+
                 return View();
             }
             catch
@@ -93,7 +96,7 @@ namespace CheapWare.WebApp.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     return View("Error");
-                }
+                } 
 
                 return View();
             }

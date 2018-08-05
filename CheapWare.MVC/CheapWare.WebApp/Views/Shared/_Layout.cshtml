@@ -30,20 +30,32 @@
             </div>
             <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Inventorys" asp-action="Index">Browse by Category</a></li>
-                    <li><a asp-area="" asp-controller="Inventorys" asp-action="Index">Inventory</a></li>
-                    <li><a asp-area="" asp-controller="Cpus" asp-action="Index">CpuTesting</a></li>
-                    <li><a asp-area="" asp-controller="Carts" asp-action="Index">Cart</a></li>
                     <li>
-                        <form asp-action="Index" class="navbar-form navbar-left" method="get" float="right">
-                            <div class="form-group">
-                            <input class ="form-control" type="search" name="search" />
-                            <button class="btn btn-primary"type="submit">Search</button>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
+                        <span>
+                            @{if (TempData.Peek("CustomerId") != null)
+                                {
+
+                                    TempData.Peek("CustomerId").ToString();
+                                }
+                            }
+                            </span>
+                        </li>
+                 
+
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Inventorys" asp-action="Index">Browse by Category</a></li>
+                        <li><a asp-area="" asp-controller="Inventorys" asp-action="Index">Inventory</a></li>
+                        <li><a asp-area="" asp-controller="Cpus" asp-action="Index">CpuTesting</a></li>
+                        <li><a asp-area="" asp-controller="Carts" asp-action="Index">Cart</a></li>
+                        <li>
+                            <form asp-action="Index" class="navbar-form navbar-left" method="get" float="right">
+                                <div class="form-group">
+                                    <input class="form-control" type="search" name="search" />
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
             </div>
         </div>
     </nav>

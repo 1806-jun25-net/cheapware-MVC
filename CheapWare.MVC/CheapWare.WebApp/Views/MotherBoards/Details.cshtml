@@ -1,4 +1,4 @@
-﻿@model Cheapware.WebApp.Models.MotherBoards
+﻿@model CheapWare.WebApp.Models.MotherBoards
 
 
 
@@ -34,8 +34,12 @@
 
         </div>
         <div class="panel-body">
+<<<<<<< HEAD
             @Html.ActionLink("Add To Cart", "AddCart", "MotherBoards", null, new { Name = Model.Name, @class = "btn btn-info" })
             <a asp-action="AddCart" asp-controller="MotherBoards" style="display:inline-block !important" class="btn btn-info">Add to Cart</a>
+=======
+            <a asp-action="AddCart" asp-controller="Carts" asp-route-name="@Model.Name" style="display:inline-block !important" class="btn btn-info">Add to Cart</a>
+>>>>>>> ce2e32a49a0176f447769f819d5350f43639206d
             
             <a asp-action="Index" asp-controller="Inventorys" class="btn btn-primary">Back to List</a>
         </div>
