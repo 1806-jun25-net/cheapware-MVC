@@ -38,8 +38,7 @@ namespace CheapWare.WebApp.Controllers
 
         // POST: Inventorys/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(string name)
+        public async Task<ActionResult> AddCart(string name)
         {
             var temp = TempData.Peek("CustomerId");
             Carts cart = new Carts
@@ -51,7 +50,7 @@ namespace CheapWare.WebApp.Controllers
             {
                 string jsonString = JsonConvert.SerializeObject(cart);
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/cart/AddToCart");
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/cart/AddCart");
                 {
                     // we set what the Content-Type header will be here
                     request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -65,27 +64,9 @@ namespace CheapWare.WebApp.Controllers
                     return View("Error");
                 }
 
-                HttpRequestMessage apiReq = CreateRequestToService(HttpMethod.Get, "api/inventorys/" + name);
-                HttpResponseMessage apiResp;
-                try
-                {
-                    apiResp = await HttpClient.SendAsync(apiReq);
-                }
-                catch
-                {
-                    return View("Error");
-                }
-                if (!apiResp.IsSuccessStatusCode)
-                {
-                    return View("Error");
-                }
-                string invjsonString = await apiResp.Content.ReadAsStringAsync();
-
-                Inventorys cc = JsonConvert.DeserializeObject<Inventorys>(jsonString);
-
-                //TempData["CustomerId"] = cc;
-
-                return RedirectToAction("index", cc);
+                
+                
+                return View();
             }
             catch
             {
