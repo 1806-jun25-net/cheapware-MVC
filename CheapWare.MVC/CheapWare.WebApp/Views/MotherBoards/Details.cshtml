@@ -1,9 +1,6 @@
 ﻿@model Cheapware.WebApp.Models.MotherBoards
 
-@{
-    ViewData["Title"] = "Details";
 
-}
 
 
 <div class="container" style="padding:15px !important;">
@@ -37,8 +34,8 @@
 
         </div>
         <div class="panel-body">
-            @Html.ActionLink("Add To Cart", "AddCart", "Carts", null, new { Name = Model.Name, @class = "btn btn-info" })
-            <a asp-action="AddCart" asp-controller="Carts" style="display:inline-block !important" class="btn btn-info">Add to Cart</a>
+            @Html.ActionLink("Add To Cart", "AddCart", "MotherBoards", null, new { Name = Model.Name, @class = "btn btn-info" })
+            <a asp-action="AddCart" asp-controller="MotherBoards" style="display:inline-block !important" class="btn btn-info">Add to Cart</a>
             
             <a asp-action="Index" asp-controller="Inventorys" class="btn btn-primary">Back to List</a>
         </div>
