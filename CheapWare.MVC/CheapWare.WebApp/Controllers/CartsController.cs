@@ -27,10 +27,35 @@ namespace CheapWare.WebApp.Controllers
             return View();
         }
 
+        
+
         [HttpGet]
-       public ActionResult Index()
+        public async Task<ActionResult<Inventorys>> Index()
         {
-            return View();
+            // don't forget to register HttpClient as a singleton service in Startup.cs.
+            var temp = (int)TempData.Peek("CustomerId");
+            var request = CreateRequestToService(HttpMethod.Get, "api/Cart/cartByCustomer/" + temp);
+
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                List<Inventorys> i = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
+
+                return View(i);
+            }
+            catch (HttpRequestException)
+            {
+                // logging
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -53,11 +78,8 @@ namespace CheapWare.WebApp.Controllers
             {
                 string jsonString = JsonConvert.SerializeObject(cart);
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/cart/AddCart");
-                {
-                    // we set what the Content-Type header will be here
-                    request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-                };
+                var request = CreateRequestToService(HttpMethod.Post, "api/cart/AddCart", cart);
+                
 
                 var response = await HttpClient.SendAsync(request);
 
