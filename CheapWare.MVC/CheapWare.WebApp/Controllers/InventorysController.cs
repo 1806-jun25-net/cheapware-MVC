@@ -115,7 +115,7 @@ namespace CheapWare.WebApp.Controllers
 
                 List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
 
-                var tester = TempData.Peek("customerId");
+                var tester = TempData.Peek("CustomerId");
 
                 return View(inv);
             }
