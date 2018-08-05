@@ -96,11 +96,11 @@ namespace CheapWare.WebApp.Controllers
         }
 
         // GET: Inventorys
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index([FromQuery]string search = "")
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
 
-            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys");
+            var request = CreateRequestToService(HttpMethod.Get, "api/inventorys/Search?search=" + search);
 
             try
             {
@@ -114,8 +114,6 @@ namespace CheapWare.WebApp.Controllers
                 string jsonString = await response.Content.ReadAsStringAsync();
 
                 List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
-
-                var tester = TempData.Peek("customerId");
 
                 return View(inv);
             }
