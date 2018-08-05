@@ -61,6 +61,7 @@ namespace TodoMvc.Controllers
 
             if (!apiAccResponse.IsSuccessStatusCode)
             {
+                TempData["statuscode"] = apiAccResponse.StatusCode;
                 return View("Error");
             }
 
@@ -91,6 +92,7 @@ namespace TodoMvc.Controllers
 
             if (!apiCustResponse.IsSuccessStatusCode)
             {
+                TempData["statuscode"] = apiCustResponse.StatusCode;
                 return View("Error");
             }
 
@@ -106,6 +108,7 @@ namespace TodoMvc.Controllers
             }
             if (!apiResp.IsSuccessStatusCode)
             {
+                TempData["statuscode"] = apiResp.StatusCode;
                 return View("Error");
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
@@ -146,6 +149,7 @@ namespace TodoMvc.Controllers
                 {
                     return View("AccessDenied");
                 }
+                TempData["statuscode"] = apiResponse.StatusCode;
                 return View("Error");
             }
 
@@ -162,6 +166,7 @@ namespace TodoMvc.Controllers
             }
             if (!apiResp.IsSuccessStatusCode)
             {
+                TempData["statuscode"] = apiResp.StatusCode;
                 return View("Error");
             }
             string jsonString = await apiResp.Content.ReadAsStringAsync();
@@ -196,6 +201,7 @@ namespace TodoMvc.Controllers
 
             if (!apiResponse.IsSuccessStatusCode)
             {
+                TempData["statuscode"] = apiResponse.StatusCode;
                 return View("Error");
             }
 
