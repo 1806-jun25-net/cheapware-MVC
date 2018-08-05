@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Cheapware.WebApp.Models;
+using CheapWare.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace TodoMvc.Controllers
+namespace CheapWare.WebApp.Controllers
 {
 
     public class AccountController : AServiceController

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Cheapware.WebApp.Models;
+using CheapWare.WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using TodoMvc.Controllers;
 
 namespace CheapWare.WebApp.Controllers
 {
@@ -115,6 +114,8 @@ namespace CheapWare.WebApp.Controllers
                 string jsonString = await response.Content.ReadAsStringAsync();
 
                 List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
+
+                var tester = TempData.Peek("customerId");
 
                 return View(inv);
             }
