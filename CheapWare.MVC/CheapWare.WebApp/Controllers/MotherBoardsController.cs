@@ -107,7 +107,7 @@ namespace CheapWare.WebApp.Controllers
                 return View();
             }
         }
-
+        
         // GET: Inventorys/Edit/5
         public ActionResult Edit(int id)
         {
