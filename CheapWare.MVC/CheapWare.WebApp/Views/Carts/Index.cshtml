@@ -59,46 +59,57 @@
         }
        
         @{ 
+            int count = 0;
             if(hd == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if (gc == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if (cc == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if (mboard == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if (ps == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if (ram == true)
             {
+                count++;
                 width += 100 / 7;
             }
             if (cpu == true)
             {
+                count++;
                 width += 100 / 7;
 
             }
             if(width > 95)
-            {
-                width = 100;
+            { 
+            width = 100;
 
             }
         }
+            <div><h4 class="h4">PC Progress</h4>
+                 <h4 class="h4">@count parts out of 7 for full PC</h4>
+            </div>
             <div class="progress progress-striped active">
                 <div class="progress-bar progress-bar-info" style="@("width: " + width + "%;")"></div>
             </div>
