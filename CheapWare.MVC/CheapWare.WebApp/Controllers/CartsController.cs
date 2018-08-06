@@ -177,7 +177,7 @@ namespace CheapWare.WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(int cartId)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Cart/DeleteByCartId/" + cartId);
+            var request = CreateRequestToService(HttpMethod.Delete, "api/Cart/DeleteByCartId/" + cartId);
             try
             {
                 var response = await HttpClient.SendAsync(request);
@@ -185,9 +185,9 @@ namespace CheapWare.WebApp.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     return View("Error");
-                } 
+                }
 
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch
             {
