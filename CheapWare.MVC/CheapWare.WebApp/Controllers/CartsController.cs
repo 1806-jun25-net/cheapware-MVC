@@ -27,15 +27,10 @@ namespace CheapWare.WebApp.Controllers
             return View();
         }
 
-        
-
-        [HttpGet]
-        public async Task<ActionResult<Inventorys>> Index()
+       [HttpDelete]
+        public async Task<ActionResult> DeleteCartByCartId(int cartId)
         {
-            // don't forget to register HttpClient as a singleton service in Startup.cs.
-            var temp = (int)TempData.Peek("CustomerId");
-            var request = CreateRequestToService(HttpMethod.Get, "api/Cart/cartByCustomer/" + temp);
-
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/cart/DeleteByCartId/" + cartId);
             try
             {
                 var response = await HttpClient.SendAsync(request);
@@ -45,11 +40,54 @@ namespace CheapWare.WebApp.Controllers
                     return View("Error");
                 }
 
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Inventorys>> Index()
+        {
+            // don't forget to register HttpClient as a singleton service in Startup.cs.
+            var temp = (int)TempData.Peek("CustomerId");
+            var request = CreateRequestToService(HttpMethod.Get, "api/Cart/cartByCustomer/" + temp);
+            var req = CreateRequestToService(HttpMethod.Get, "api/Cart/CartIdsByCustomer/" + temp);
+            try
+            {
+                var response = await HttpClient.SendAsync(request);
+                var res = await HttpClient.SendAsync(req);
+                
+                if (!response.IsSuccessStatusCode && !res.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
                 string jsonString = await response.Content.ReadAsStringAsync();
-
+                string jString = await res.Content.ReadAsStringAsync();
                 List<Inventorys> i = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString);
+                List<Carts> c = JsonConvert.DeserializeObject<List<Carts>>(jString);
+                List<InventoryCartView> icv = new List<InventoryCartView>();
 
-                return View(i);
+                for(int l = 0; l < i.Count; l++)
+                {
+                    var obj = new InventoryCartView()
+                    {
+                        Name = i[l].Name,
+                        Quantity = i[l].Quantity,
+                        Category = i[l].Category,
+                        Price = i[l].Price,
+                        Image = i[l].Image,
+                        CartId = c[l].CartId
+
+                    };
+                    icv.Add(obj);
+                        
+                }
+
+                return View(icv);
             }
             catch (HttpRequestException)
             {
@@ -58,13 +96,17 @@ namespace CheapWare.WebApp.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Index2()
+     
+
+
+        [HttpPost]
+        public async Task<ActionResult> PlaceOrder(List<Inventorys> items)
         {
             return View();
         }
+        
 
-        // POST: Inventorys/Create
+
         [HttpGet]
         public async Task<ActionResult> AddCart(string name)
         {
