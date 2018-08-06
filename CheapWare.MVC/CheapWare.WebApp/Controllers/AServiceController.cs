@@ -13,6 +13,7 @@ namespace CheapWare.WebApp.Controllers
     public abstract class AServiceController : Controller
     {
         //https://localhost:44306/
+        //http://cheapwareapi.azurewebsites.net/
         private static readonly Uri s_serviceUri = new Uri("http://cheapwareapi.azurewebsites.net/");
         protected static readonly string s_CookieName = "IdentityAuth";
 
