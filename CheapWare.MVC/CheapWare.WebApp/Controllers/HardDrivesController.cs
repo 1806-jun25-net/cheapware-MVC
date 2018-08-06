@@ -30,6 +30,7 @@ namespace CheapWare.WebApp.Controllers
 
                 if (!response.IsSuccessStatusCode)
                 {
+                    TempData["statuscode"] = response.StatusCode;
                     return View("Error");
                 }
 

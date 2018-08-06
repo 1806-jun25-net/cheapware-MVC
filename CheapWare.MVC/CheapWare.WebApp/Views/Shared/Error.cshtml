@@ -4,7 +4,7 @@
 }
 
 <h1 class="text-danger">An error has occured</h1>
-<h3 class="alert-danger">HTTP Status Code: @TempData["statuscode"]</h3>
+<h3 class="alert-danger">HTTP Status Code: @TempData.Peek("statuscode")</h3>
 
 
 <h5 class="alert-info">Here are the Status Codes:</h5>
