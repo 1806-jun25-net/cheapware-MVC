@@ -138,20 +138,20 @@ namespace CheapWare.WebApp.Controllers
             {
                 apiResponse = await HttpClient.SendAsync(apiRequest);
             }
-            catch (AggregateException)
+            catch 
             {
-                return View("Error");
+                return View();
             }
 
             if (!apiResponse.IsSuccessStatusCode)
             {
                 if (apiResponse.StatusCode == HttpStatusCode.Forbidden)
                 {
-                    TempData["statuscode"] = apiResponse.StatusCode;
-                    return View("Error");
+                    TempData["logged"] = false;
+                    return View("Login");
                 }
-                TempData["statuscode"] = apiResponse.StatusCode;
-                return View("Error");
+                TempData["logged"] = false;
+                return View("Login");
             }
 
             PassCookiesToClient(apiResponse);

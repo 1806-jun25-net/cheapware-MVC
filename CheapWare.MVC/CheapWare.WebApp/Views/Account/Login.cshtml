@@ -9,6 +9,13 @@
 <br />
 <div class="row">
     <div class="col-md-4" >
+        @{ 
+            if(TempData.Peek("logged") != null)
+            {
+                <h3 class="h3">Wrong Username and Password Try Again</h3>
+
+            }
+        }
         <form asp-action="Login" class = "form-horizontal jumbotron">
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
