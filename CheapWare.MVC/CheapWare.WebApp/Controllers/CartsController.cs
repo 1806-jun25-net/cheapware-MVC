@@ -48,7 +48,11 @@ namespace CheapWare.WebApp.Controllers
         public async Task<ActionResult<Inventorys>> Index()
         {
             // don't forget to register HttpClient as a singleton service in Startup.cs.
-            var temp = (int)TempData.Peek("CustomerId");
+            int temp;
+            if (TempData.Peek("CustomerId") != null)
+                temp = (int)TempData.Peek("CustomerId");
+            else
+                temp = 0;
             var request = CreateRequestToService(HttpMethod.Get, "api/Cart/cartByCustomer/" + temp);
             var req = CreateRequestToService(HttpMethod.Get, "api/Cart/CartIdsByCustomer/" + temp);
             try
@@ -88,7 +92,7 @@ namespace CheapWare.WebApp.Controllers
             }
             catch (HttpRequestException)
             {
-                // logging
+               
                 return View("Error");
             }
         }
@@ -184,6 +188,7 @@ namespace CheapWare.WebApp.Controllers
 
                 if (!response.IsSuccessStatusCode)
                 {
+                    TempData["statuscode"] = response.StatusCode;
                     return View("Error");
                 }
 
@@ -191,6 +196,7 @@ namespace CheapWare.WebApp.Controllers
             }
             catch
             {
+                TempData["statuscode"] = "Unauthorized";
                 return View("Error");
             }
         }
