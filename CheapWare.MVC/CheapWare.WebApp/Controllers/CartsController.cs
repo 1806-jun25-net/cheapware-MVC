@@ -21,11 +21,7 @@ namespace CheapWare.WebApp.Controllers
 
 
         
-        [HttpDelete]
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+       
 
        [HttpDelete]
         public async Task<ActionResult> DeleteCartByCartId(int cartId)

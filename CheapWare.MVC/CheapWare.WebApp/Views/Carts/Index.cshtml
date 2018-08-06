@@ -1,12 +1,50 @@
 ﻿@model List<CheapWare.WebApp.Models.InventoryCartView>
+@{ 
+    double width = 0;
+    bool ram = false;
+    bool cpu = false;
+    bool mboard = false;
+    bool cc = false;
+    bool ps = false;
+    bool gc = false;
+    bool hd = false;
+}
 
 <div class="container">
     <h2 class="h2">Your Cart</h2>
     <div class="panel panel-primary">
         @foreach (var item in Model)
         {
-              
-             
+
+            if (item.Category == "RAM")
+            {
+                ram = true;
+            }
+            if(item.Category == "CPU")
+            {
+                cpu = true;
+            }
+            if (item.Category == "Motherboard")
+            {
+                mboard = true;
+            }
+            if (item.Category == "Computercase")
+            {
+                cc = true;
+            }
+            if (item.Category == "PowerSupply")
+            {
+                ps = true;
+            }
+            if (item.Category == "GraphicsCard")
+            {
+                gc = true;
+            }
+            if(item.Category == "HardDrive")
+            {
+                hd = true;
+
+            }
             <div class="container-fluid panel-body">
                 <div class="info top">
                     <h2 class="h2">@Html.DisplayFor(model => item.Name)</h2>
@@ -21,6 +59,51 @@
                
             </div>
         }
+       
+        @{ 
+            if(hd == true)
+            {
+                width += 100 / 7;
+
+            }
+            if (gc == true)
+            {
+                width += 100 / 7;
+
+            }
+            if (cc == true)
+            {
+                width += 100 / 7;
+
+            }
+            if (mboard == true)
+            {
+                width += 100 / 7;
+
+            }
+            if (ps == true)
+            {
+                width += 100 / 7;
+
+            }
+            if (ram == true)
+            {
+                width += 100 / 7;
+            }
+            if (cpu == true)
+            {
+                width += 100 / 7;
+
+            }
+            if(width > 95)
+            {
+                width = 100;
+
+            }
+        }
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-info" style="@("width: " + width + "%;")"></div>
+            </div>
         <div class="panel-body">
             <form asp-action="PlaceOrder" asp-controller="Carts">
   
