@@ -28,6 +28,7 @@
                 {
                     @Html.Hidden($"items[{i}].CustomerId", Model[i].CustomerId)
                     @Html.Hidden($"items[{i}].Name", Model[i].Name)
+                    @Html.Hidden($"items[{i}].Price", Model[i].Price)
                 }
                 <input type="submit" value="Place Order" class="btn btn-info" />
             </form>

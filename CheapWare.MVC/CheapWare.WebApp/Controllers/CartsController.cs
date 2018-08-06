@@ -103,6 +103,10 @@ namespace CheapWare.WebApp.Controllers
         public async Task<ActionResult> PlaceOrder(List<Inventorys> items)
         {
             
+            if(items.Count == 0)
+            {
+                return RedirectToAction("Index");
+            }
             try
             {
                 string jsonString = JsonConvert.SerializeObject(items);
