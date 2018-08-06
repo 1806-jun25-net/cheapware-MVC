@@ -11,7 +11,7 @@ namespace CheapWare.WebApp.Models
         public string Size { get; set; }
         public string Category { get; set; }
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        public string image { get; set; }
 
         public Inventorys NameNavigation { get; set; }
     }
