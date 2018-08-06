@@ -102,7 +102,30 @@ namespace CheapWare.WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> PlaceOrder(List<Inventorys> items)
         {
-            return View();
+            
+            try
+            {
+                string jsonString = JsonConvert.SerializeObject(items);
+
+                var request = CreateRequestToService(HttpMethod.Post, "api/Orders/PlaceOrder", items);
+
+
+                var response = await HttpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    TempData["statuscode"] = response.StatusCode;
+                    return View("Error");
+                }
+
+
+
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
         }
         
 

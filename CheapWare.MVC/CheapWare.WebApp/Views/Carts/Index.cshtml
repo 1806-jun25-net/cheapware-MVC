@@ -22,10 +22,14 @@
             </div>
         }
         <div class="panel-body">
-            <form asp-action="PlaceOrder" asp-controller="Carts" >         
-                @Html.HiddenFor(item => item, new { name = "items" })
-                
-                <input type ="submit" value="Place Order" class="btn btn-info" />
+            <form asp-action="PlaceOrder" asp-controller="Carts">
+  
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    @Html.Hidden($"items[{i}].CustomerId", Model[i].CustomerId)
+                    @Html.Hidden($"items[{i}].Name", Model[i].Name)
+                }
+                <input type="submit" value="Place Order" class="btn btn-info" />
             </form>
         </div>
     </div>

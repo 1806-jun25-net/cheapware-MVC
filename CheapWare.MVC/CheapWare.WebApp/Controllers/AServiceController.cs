@@ -32,8 +32,13 @@ namespace CheapWare.WebApp.Controllers
             if (body != null)
             {
                 string jsonString = JsonConvert.SerializeObject(body);
+
+               
                 apiRequest.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             }
+            
+            
+            
 
             string cookieValue = Request.Cookies[s_CookieName];
 
