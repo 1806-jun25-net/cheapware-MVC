@@ -51,10 +51,8 @@
                     <img class="img-responsive center-block" style="width:25%;height:25%;" src="@("https://cheapwareimages.blob.core.windows.net/images/" + item.Image)" />
                     <h4 class="h4" style="display:inline-block;">@Html.DisplayNameFor(model => item.Price):</h4>
                     &nbsp;<h4 class="h4" style="display:inline-block;">$@Html.DisplayFor(model => item.Price)</h4>
-                    <form asp-action="DeleteByCartId">
-                        <input type="hidden" asp-for="@item.CartId" name="cartId" />
-                        <input type= "submit" value="Remove" class="btn btn-danger" />
-                    </form>
+
+                    <a asp-action="Delete" asp-controller="Carts" asp-route-cartId="@item.CartId" style="display: inline-block;" class="btn btn-danger">Remove</a>
                 </div>
                
             </div>

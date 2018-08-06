@@ -34,7 +34,7 @@ namespace CheapWare.WebApp.Controllers
 
                 List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString).OrderBy(x => x.Price).ToList();
 
-                return View(inv);
+                return View("Index",inv);
             }
             catch (HttpRequestException)
             {
@@ -60,7 +60,7 @@ namespace CheapWare.WebApp.Controllers
 
                 List<Inventorys> inv = JsonConvert.DeserializeObject<List<Inventorys>>(jsonString).OrderByDescending(x => x.Price).ToList();
 
-                return View(inv);
+                return View("Index",inv);
             }
             catch (HttpRequestException)
             {

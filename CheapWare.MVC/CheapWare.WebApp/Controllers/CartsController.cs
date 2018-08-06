@@ -20,10 +20,10 @@ namespace CheapWare.WebApp.Controllers
         //Get (Index), Add (create), Delete (delete)
 
 
-        
-       
 
-       [HttpDelete]
+
+
+        [HttpDelete]
         public async Task<ActionResult> DeleteCartByCartId(int cartId)
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "api/cart/DeleteByCartId/" + cartId);
@@ -55,7 +55,7 @@ namespace CheapWare.WebApp.Controllers
             {
                 var response = await HttpClient.SendAsync(request);
                 var res = await HttpClient.SendAsync(req);
-                
+
                 if (!response.IsSuccessStatusCode && !res.IsSuccessStatusCode)
                 {
                     return View("Error");
@@ -67,7 +67,7 @@ namespace CheapWare.WebApp.Controllers
                 List<Carts> c = JsonConvert.DeserializeObject<List<Carts>>(jString);
                 List<InventoryCartView> icv = new List<InventoryCartView>();
 
-                for(int l = 0; l < i.Count; l++)
+                for (int l = 0; l < i.Count; l++)
                 {
                     var obj = new InventoryCartView()
                     {
@@ -80,7 +80,7 @@ namespace CheapWare.WebApp.Controllers
 
                     };
                     icv.Add(obj);
-                        
+
                 }
 
                 return View(icv);
@@ -92,14 +92,14 @@ namespace CheapWare.WebApp.Controllers
             }
         }
 
-     
+
 
 
         [HttpPost]
         public async Task<ActionResult> PlaceOrder(List<Inventorys> items)
         {
-            
-            if(items.Count == 0)
+
+            if (items.Count == 0)
             {
                 return RedirectToAction("Index");
             }
@@ -127,7 +127,7 @@ namespace CheapWare.WebApp.Controllers
                 return View();
             }
         }
-        
+
 
 
         [HttpGet]
@@ -144,7 +144,7 @@ namespace CheapWare.WebApp.Controllers
                 string jsonString = JsonConvert.SerializeObject(cart);
 
                 var request = CreateRequestToService(HttpMethod.Post, "api/cart/AddCart", cart);
-                
+
 
                 var response = await HttpClient.SendAsync(request);
 
@@ -173,9 +173,10 @@ namespace CheapWare.WebApp.Controllers
 
 
         // GET: Inventorys/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        [HttpGet]
+        public async Task<ActionResult> Delete(int cartId)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "api/cart/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Cart/DeleteByCartId/" + cartId);
             try
             {
                 var response = await HttpClient.SendAsync(request);
@@ -185,11 +186,11 @@ namespace CheapWare.WebApp.Controllers
                     return View("Error");
                 } 
 
-                return View();
+                return View("Index");
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 
