@@ -147,7 +147,8 @@ namespace CheapWare.WebApp.Controllers
             {
                 if (apiResponse.StatusCode == HttpStatusCode.Forbidden)
                 {
-                    return View("AccessDenied");
+                    TempData["statuscode"] = apiResponse.StatusCode;
+                    return View("Error");
                 }
                 TempData["statuscode"] = apiResponse.StatusCode;
                 return View("Error");
