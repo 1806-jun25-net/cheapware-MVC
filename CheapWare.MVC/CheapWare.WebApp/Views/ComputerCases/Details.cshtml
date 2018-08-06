@@ -28,9 +28,9 @@
 
         </div>
         <div class="panel-body">
-            <form asp-controller="Cart" asp-action="AddToCart" style="display:inline-block !important;">
-                <input class="btn btn-info" type="button" value="Add to Cart" />
-            </form>
+
+            <a asp-action="AddCart" asp-controller="Carts" asp-route-name="@Model.Name" style="display:inline-block !important" class="btn btn-info">Add to Cart</a>
+
             <a asp-action="Index" asp-controller="Inventorys" class="btn btn-primary">Back to List</a>
         </div>
     </div>
